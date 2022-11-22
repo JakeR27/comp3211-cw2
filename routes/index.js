@@ -10,22 +10,22 @@ router.get('/', function(req, res, next) {
     let cap = "";
     let country = "";
 
-    console.log(req.query);
+    if(req.query.country) {
+        for (let [key, value] of Object.entries(countries)) {
+            if (value.toString().toLowerCase() === req.query.country.toLowerCase()) {
+                cc2 = key;
+                country = value;
+            }
+        }
 
-    for ( let [key, value] of Object.entries(countries)){
-        if (value.toLowerCase() === req.query.country.toLowerCase()) {
-            cc2 = key;
-            country = value;
+        for (let [key, value] of Object.entries(capitals)) {
+            if (key === cc2) {
+                cap = value;
+            }
         }
     }
 
-    for ( let [key, value] of Object.entries(capitals)) {
-        if (key === cc2) {
-            cap = value;
-        }
-    }
-
-    let xml = `<?xml version=\"1.0\" encoding=\"UTF-8\"?><country-capital><country>${country}</country><capital>${cap}</capital><country-capital>`;
+    let xml = `<?xml version=\"1.0\" encoding=\"UTF-8\"?><country-capital><country>${country}</country><capital>${cap}</capital></country-capital>`;
     let raw = cap;
     let json = {country: country, capital: cap};
 
@@ -41,13 +41,13 @@ router.get('/', function(req, res, next) {
             'text/xml': () => {
                 res.send(xml)
             },
-            'application/xml': () => {
+            xml: () => {
                 res.send(xml)
             },
-            'application/json': () => {
+            json: () => {
                 res.json(json)
             },
-            'text/plain': () => {
+            text: () => {
                 res.send(raw)
             },
             html: () => {
