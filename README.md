@@ -7,11 +7,17 @@ capital city in three different formats: plaintext, JSON, and XML.
 ## Running
 This service is written in javascript on the express.js framework. This
 javascript can be run on the Node.js runtime. First ensure the current
-command line directory is the root directory of this project. Assuming npm is 
-installed, this project can be run by first running the command `npm install`
-which will download the required dependencies for the project. The project
-can then be run with the command `node .\bin\www`. A web server should now be
-accessible on __localhost:3000__, or the address printed to stdout (console)
+command line directory is the root directory of this project. There should be
+2 directories (comp3211-cw2, nodebin) and 2 files (run.sh, setup.sh).
+
+The project depends on a number of modules provided by npm. These must be
+fetched before the service will run. Use the command `./setup.sh` to fetch
+these. 
+
+The service can now be started with `./run.sh`.
+
+Both `run.sh` and `setup.sh` scripts must be executable to run them. If they
+are not, `chmod +x run.sh` and `chmod +x setup.sh` will change this.
 
 ### Making a request
 This service operates by responding to HTTP requests to the root URL of the 
